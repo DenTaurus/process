@@ -1,0 +1,6 @@
+CREATE TABLE testbase (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    isadmin BOOLEAN NOT NULL
+);
