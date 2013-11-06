@@ -14,7 +14,6 @@ $this->menu = array(
 
 </br>
 <?php
-
 Yii::app()->clientScript->registerScript('fc', "
 
 $('a[title=\"Stop\"]').live('click',function(event)
@@ -54,7 +53,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'status',
             'value' => 'Process::getLabelStatus($data->status)',
             'type' => 'html',
-            'htmlOptions'=>array('class'=>'statusColumn'),
+            'htmlOptions' => array('class' => 'statusColumn'),
         ),
         array(
             'class' => 'CButtonColumn',
@@ -77,8 +76,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
     ),
 ));
-if(Yii::app()->user->checkAccess("administrator")){
-    
+if (Yii::app()->user->checkAccess("administrator")) {
+
     Yii::app()->clientScript->registerScript('hc', "
     var url = document.location.href + '?progress';
     $('<div class=\'progress-label\' style=\'position: absolute; left: 40%; top: 1px; font-weight: bold;text-shadow: 1px 1px 0 #fff;\'></div>').appendTo('#my_progressbar');
@@ -124,14 +123,20 @@ if(Yii::app()->user->checkAccess("administrator")){
     }
 
 ", CClientScript::POS_READY);
-    
-$this->widget('zii.widgets.jui.CJuiProgressBar', array(
-    'id' => 'my_progressbar',
-    'htmlOptions' => array(
-        'style' => 'height:20px; width:400px; position: relative;',
-    ),
-));
 
+    $this->widget('zii.widgets.jui.CJuiProgressBar', array(
+        'id' => 'my_progressbar',
+        'htmlOptions' => array(
+            'style' => 'height:20px; width:400px; position: relative;',
+        ),
+    ));
+} elseif (Yii::app()->user->checkAccess("user")) {
+    Yii::app()->clientScript->registerScript('ffc', "
+    var delay = 6000;
+    setInterval(function() {
+        $.fn.yiiGridView.update('processView-grid'); 
+    }, delay);  
+    ", CClientScript::POS_READY);
 }
 ?>
 

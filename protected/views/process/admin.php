@@ -4,7 +4,6 @@
 
 
 $this->menu = array(
-    array('label' => 'Процессы', 'url' => array('admin')),
     array('label' => 'Создать процесс', 'url' => array('create')),
 );
 
